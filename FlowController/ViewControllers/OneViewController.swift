@@ -61,6 +61,20 @@ class OneViewController: UIViewController
     override func viewDidLoad() {
         // navigationController sempre a nil
 
+        //<scheme name> : <hierarchical part> [ ? <query> ] [ # <fragment> ]
+        let urlCall = NSURL(string: "internal://user/profile?id=123")!
+
+        println(urlCall.query)
+        println(urlCall.pathComponents)
+        println(urlCall.host)
+
+        let urlComps = NSURLComponents(URL: urlCall, resolvingAgainstBaseURL: false)!
+
+        if let queryItems = urlComps.queryItems {
+            for item in queryItems as [NSURLQueryItem] {
+                println("Name: \(item.name)=\(item.value)")
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
