@@ -47,7 +47,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func start() -> UIViewController {
         let flowCtrl = FlowController()
 
-        let view1Ctrl = OneViewController(1)
+        var flow = [NSURL: UIViewController.Type]()
+
+        flow[NSURL(string: "internal://user")!] = OneViewController.self
+
+        let view1Ctrl = flow[NSURL(string: "internal://user")!]!()
+
         let rc1 = CFGetRetainCount(view1Ctrl);
         view1Ctrl.view.backgroundColor = UIColor.blueColor()
         println("View1: \(view1Ctrl.description) \(rc1)")
@@ -58,8 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //flowCtrl.pushViewController(view2Ctrl, animated: false)
 
         flowCtrl.showViewController(view1Ctrl, sender: view1Ctrl)
-
-
 
         return flowCtrl
     }

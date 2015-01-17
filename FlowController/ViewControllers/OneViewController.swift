@@ -15,9 +15,13 @@ class OneViewController: UIViewController
 
     private let counter: Int
 
+    override convenience init() {
+        self.init(0)
+    }
+
     required init(_ startAt: Int) {
         counter = startAt
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: nil) //designated
     }
 
     required init(coder aDecoder: NSCoder) {
