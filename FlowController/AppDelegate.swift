@@ -47,12 +47,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func start() -> UIViewController {
         let flowCtrl = FlowController()
 
-        let view1Ctrl = OneViewController()
+        let view1Ctrl = OneViewController(1)
         let rc1 = CFGetRetainCount(view1Ctrl);
         view1Ctrl.view.backgroundColor = UIColor.blueColor()
         println("View1: \(view1Ctrl.description) \(rc1)")
 
-        let view2Ctrl = OneViewController()
+        let view2Ctrl = OneViewController(1)
         view2Ctrl.view.backgroundColor = UIColor.redColor()
         println("View2: \(view2Ctrl.description)")
         //flowCtrl.pushViewController(view2Ctrl, animated: false)

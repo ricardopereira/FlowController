@@ -10,16 +10,12 @@ import UIKit
 
 class OneViewController: UIViewController
 {
-    var buttonTeste: UIButton!
+    private var buttonTeste: UIButton!
+    private let counter: Int
 
-    required override init() {
-        super.init()
-
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
+    required init(_ startAt: Int) {
+        counter = startAt
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -69,8 +65,14 @@ class OneViewController: UIViewController
         let list = [self.dynamicType]
 
         // Teste
-        if let navCtrl = navigationController {
-            navCtrl.showDetailViewController(list[0](), sender: nil)
+        if counter <= 5 {
+            if let navCtrl = navigationController {
+                navCtrl.showViewController(list[0](counter+1), sender: nil)
+                println("New on stack: \(counter)")
+            }
+        }
+        else if let navCtrl = navigationController {
+            navCtrl.showDetailViewController(list[0](counter+1), sender: nil)
             println("New detail")
         }
         else {
