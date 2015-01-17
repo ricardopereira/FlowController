@@ -11,6 +11,8 @@ import UIKit
 class OneViewController: UIViewController
 {
     private var buttonTeste: UIButton!
+    private var buttonClose: UIButton!
+
     private let counter: Int
 
     required init(_ startAt: Int) {
@@ -44,10 +46,16 @@ class OneViewController: UIViewController
         button.layer.cornerRadius = 3.0
         button.layer.borderWidth = 1.0
         button.layer.borderColor = button.titleLabel?.textColor.CGColor
-
         button.addTarget(self, action: Selector("didTouchButtonTeste:"), forControlEvents: .TouchUpInside)
-
         view.addSubview(button)
+
+        buttonClose = UIButton(frame: CGRectMake(button.frame.width+10+20, 80, 70, 30))
+        buttonClose.setTitle("Close", forState: .Normal)
+        buttonClose.layer.cornerRadius = 3.0
+        buttonClose.layer.borderWidth = 1.0
+        buttonClose.layer.borderColor = buttonClose.titleLabel?.textColor.CGColor
+        buttonClose.addTarget(self, action: Selector("didTouchButtonClose:"), forControlEvents: .TouchUpInside)
+        view.addSubview(buttonClose)
     }
 
     override func viewDidLoad() {
@@ -78,6 +86,23 @@ class OneViewController: UIViewController
         else {
             dismissViewControllerAnimated(true, completion: nil)
             println("No navigation")
+        }
+    }
+
+    func didTouchButtonClose(sender: AnyObject?) {
+        if let navCtrl = navigationController {
+            if navCtrl.viewControllers.count == 1 {
+                // Teste
+                //navCtrl.setViewControllers([], animated: false)
+                //navCtrl.showViewController(self, sender: nil)
+                println("Closed")
+            }
+            else {
+                // Root
+                //navCtrl.popToRootViewControllerAnimated(false)
+                navCtrl.setViewControllers([], animated: false)
+                navCtrl.showViewController(UIViewController(), sender: nil)
+            }
         }
     }
 }
